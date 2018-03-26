@@ -90,5 +90,21 @@ public class BatchRepositoryTest {
 		Batch last = batches.get(batches.size()-1);
 		Assert.assertTrue(first.getBatchStartDate().getTime() < last.getBatchStartDate().getTime());
 	}
+	
+	@Test
+	public void test5Update() {
+		log.info("test5Update");
+		String changeName = "changedBatchName";
+		testBatch.setBatchName(changeName);
+		Batch updated = batchRepository.save(testBatch);
+		Assert.assertEquals(changeName, updated.getBatchName());
+	}
+	
+	@Test
+	public void test6Delete() {
+		log.info("test6Delete");
+		batchRepository.delete(testId);
+		Assert.assertNull(batchRepository.findOne(testId));
+	}
 
 }
