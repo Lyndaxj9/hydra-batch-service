@@ -33,7 +33,7 @@ public interface BatchRepository extends JpaRepository<Batch, Integer> {
 	 * @param batchId
 	 * @return
 	 */
-	Batch findOneByBatchId(Integer batchId);
+	Batch findOne(Integer batchId);
 	
 	/**
 	 * Find all batches sorted by start date

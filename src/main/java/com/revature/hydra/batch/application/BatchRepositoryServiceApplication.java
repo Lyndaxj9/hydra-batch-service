@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 @Controller
 @EnableAutoConfiguration
 @EnableJpaRepositories("com.revature.hydra.batch.data")
-@ComponentScan
+@ComponentScan(basePackages = {"com.revature.hydra.batch.controller", "com.revature.hydra.batch.service"})
 @EntityScan("com.revature.beans")
 public class BatchRepositoryServiceApplication {
 	public static void main(String[] args) {
