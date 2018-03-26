@@ -61,3 +61,16 @@ Insert into CALIBER_BATCH (BATCH_ID,BATCH_END_DATE,BATCH_NAME,BATCH_START_DATE,B
 Insert into CALIBER_BATCH (BATCH_ID,BATCH_END_DATE,BATCH_NAME,BATCH_START_DATE,BATCH_LOCATION_ID,CURRICULUM_ID) values (56,null,'1802 Feb12 AP, USF',null,null,null);
 Insert into CALIBER_BATCH (BATCH_ID,BATCH_END_DATE,BATCH_NAME,BATCH_START_DATE,BATCH_LOCATION_ID,CURRICULUM_ID) values (57,null,'1802 Feb26',null,null,null);
 Insert into CALIBER_BATCH (BATCH_ID,BATCH_END_DATE,BATCH_NAME,BATCH_START_DATE,BATCH_LOCATION_ID,CURRICULUM_ID) values (58,null,'1611 Nov28 JTA',null,null,1);
+
+
+--------------------------------------------------------
+--  File created - Thursday-March-22-2018   
+--------------------------------------------------------
+-- REM INSERTING into CALIBER_BATCH_LOCATION
+
+Insert into CALIBER_BATCH_LOCATION (BATCH_LOCATION_ID,BATCH_LOCATION_NAME) values (1,'Revature LLC, 11730 Plaza America Drive, 2nd Floor | Reston, VA 20190');
+Insert into CALIBER_BATCH_LOCATION (BATCH_LOCATION_ID,BATCH_LOCATION_NAME) values (2,'UMUC');
+Insert into CALIBER_BATCH_LOCATION (BATCH_LOCATION_ID,BATCH_LOCATION_NAME) values (3,'USF');
+Insert into CALIBER_BATCH_LOCATION (BATCH_LOCATION_ID,BATCH_LOCATION_NAME) values (4,'SkySong Innovation Center, 1475 N. Scottsdale Road, Scottsdale, AZ 85257');
+Insert into CALIBER_BATCH_LOCATION (BATCH_LOCATION_ID,BATCH_LOCATION_NAME) values (5,'Tech Incubator at Queens College, 65, 30 Kissena Blvd, CEP Hall 2, Queens, NY 11367');
+Insert into CALIBER_BATCH_LOCATION (BATCH_LOCATION_ID,BATCH_LOCATION_NAME) values (6,'CUNY, SPS 119 West 31st Street, New York, NY 10001');

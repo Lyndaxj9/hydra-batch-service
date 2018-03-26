@@ -6,12 +6,9 @@ import java.util.HashSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -25,27 +22,48 @@ import javax.persistence.Table;
 public class Batch implements Serializable {
 	private static final long serialVersionUID = -4807985624462658242L;
 
+	/**
+	 * Id of a batch
+	 */
 	@Id
 	@Column(name = "BATCH_ID")
 	@SequenceGenerator(name = "BATCH_ID_SEQUENCE", sequenceName = "BATCH_ID_SEQUENCE", initialValue = 1000)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BATCH_ID_SEQUENCE")
 	private Integer batchId;
 	
+	/**
+	 * Name of a batch
+	 */
 	@Column(name = "BATCH_NAME", length = 50)
 	private String batchName;
 	
+	/**
+	 * Location id to link to batch locations from BatchLocation Table
+	 */
 	@Column(name = "BATCH_LOCATION_ID")
 	private Integer batchLocationId;
 	
+	/**
+	 * Date batch started
+	 */
 	@Column(name = "BATCH_START_DATE")
 	private Timestamp batchStartDate;
 	
+	/**
+	 * Date batch ended
+	 */
 	@Column(name = "BATCH_END_DATE")
 	private Timestamp batchEndDate;
 	
+	/**
+	 * Curriculum id to link to curriculums from Curriculum Microservice
+	 */
 	@Column(name = "CURRICULUM_ID")
 	private Integer curriculumId;
 	
+	/**
+	 * Set of associates that belong to a specific batch
+	 */
 	@Column(name = "ASSOCIATES_SET")
 	private HashSet<Integer> associates;
 	
