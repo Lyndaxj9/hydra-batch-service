@@ -2,7 +2,7 @@ package com.revature.beans;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Set;
+import java.util.HashSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,5 +44,5 @@ public class Batch implements Serializable {
 	private Integer curriculumId;
 	
 	@Column(name = "ASSOCIATES_SET")
-	private Set<Integer> associates;
+	private HashSet<Integer> associates;
 }
