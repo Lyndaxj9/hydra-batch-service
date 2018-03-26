@@ -24,20 +24,20 @@ public interface BatchRepository extends JpaRepository<Batch, Integer> {
 	/**
 	 * Find a batch by batch name
 	 * @param batchName
-	 * @return
+	 * @return Batch
 	 */
 	Batch findOneByBatchName(String batchName);
 	
 	/**
 	 * Find a batch by batch id
 	 * @param batchId
-	 * @return
+	 * @return Batch
 	 */
 	Batch findOne(Integer batchId);
 	
 	/**
 	 * Find all batches sorted by start date
-	 * @return
+	 * @return List<Batch>
 	 */
 	List<Batch> findAllByOrderByBatchStartDateAsc();
 }
