@@ -35,7 +35,7 @@ public class BatchLocationController {
 	 * @return ResponseEntity<Batch>
 	 */
 	@RequestMapping(value = "/one/batchlocation/byid/{id}", method = RequestMethod.GET)
-	public ResponseEntity<BatchLocation> getBatchByName(@PathVariable Integer id) {
+	public ResponseEntity<BatchLocation> getBatchLocationById(@PathVariable Integer id) {
 		return new ResponseEntity<>(batchLocationService.getBatchLocationById(id), HttpStatus.OK);
 	}
 }
