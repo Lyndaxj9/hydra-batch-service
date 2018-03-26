@@ -16,5 +16,5 @@ public interface BatchLocationRepository extends JpaRepository<BatchLocation, In
 	 * Get a batch location by id
 	 * @return BatchLocation
 	 */
-	BatchLocation findOne();
+	BatchLocation findOne(Integer batchLocationId);
 }
