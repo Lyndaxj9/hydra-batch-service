@@ -10,6 +10,7 @@ The controller can perform the following functions:
 	* getAllBatchesOrdered(), via a GET to /all/batch/ordered
 	* getAllBatchesMapped(), via a GET to /all/batch/mapped
 	* getAllBatchesSet(), via a GET to /all/batch/set
+	* getAllBatchesByDate(@PathVariable Long startDate, @PathVariable Long endDate), via a GET to /all/batch/btw/{startDate}/{endDate}
 	* addBatch(@RequestBody Batch batch), via a POST to /add/batch
 	* updateBatchInfo(@PathVariable Integer id, @RequestBody Batch batch), via a PUT to /update/batch/{id}
 	* deleteBatch(@PathVariable Integer id), via a DELETE to /delete/batch/{id}

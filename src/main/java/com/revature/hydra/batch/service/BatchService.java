@@ -2,6 +2,7 @@ package com.revature.hydra.batch.service;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -78,6 +79,25 @@ public class BatchService {
 		List<Batch> lb = batchRepository.findAll();
 		HashSet<Batch> hsb = new HashSet<Batch>(lb);
 		return hsb;
+	}
+	
+	/**
+	 * Get all batches between two set dates
+	 * @param fromDate
+	 * @param toDate
+	 * @return List<Batch>
+	 */
+	public List<Batch> getBatchesBtwDates(Long fromDate, Long toDate) {
+		List<Batch> batches = this.getBatchesOrderedByDate();
+		List<Batch> sublist = new LinkedList<Batch>();
+		
+		for(Batch b : batches) {
+			if(b.getBatchStartDate() != null && b.getBatchEndDate() != null && b.getBatchEndDate().getTime() >= fromDate && b.getBatchEndDate().getTime() <= toDate) {
+				sublist.add(b);
+			}
+		}
+		
+		return sublist;
 	}
 	
 	/**

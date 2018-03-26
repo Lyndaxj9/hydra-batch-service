@@ -83,6 +83,17 @@ public class BatchController {
 	}
 	
 	/**
+	 * Retrieves all batches that are between the two specified dates
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
+	@RequestMapping(value = "/all/batch/btw/{startDate}/{endDate}", method = RequestMethod.GET)
+	public ResponseEntity<List<Batch>> getAllBatchesByDate(@PathVariable Long startDate, @PathVariable Long endDate) {
+		return new ResponseEntity<>(batchService.getBatchesBtwDates(startDate, endDate), HttpStatus.OK);
+	}
+	
+	/**
 	 * Create a new batch
 	 * @param batch
 	 * @return ResponseEntity<Void>
