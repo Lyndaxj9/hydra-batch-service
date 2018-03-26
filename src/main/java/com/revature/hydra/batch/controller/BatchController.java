@@ -7,9 +7,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,10 +60,21 @@ public class BatchController {
 		return new ResponseEntity<>(batchService.getBatchesSet(), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/update/batch/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> updateBatchInfo() {
+	@RequestMapping(value = "/add/batch", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> addBatch(@RequestBody Batch batch) {
+		batchService.addBatch(batch);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/update/batch/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> updateBatchInfo(@PathVariable Integer id, @RequestBody Batch batch) {
+		batchService.updateBatch(id, batch);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 	
+	@RequestMapping(value = "/delete/batch/{id}", method = RequestMethod.DELETE) 
+	public ResponseEntity<Void> deleteBatch(@PathVariable Integer id) {
+		batchService.deleteBatch(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 }

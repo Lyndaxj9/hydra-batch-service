@@ -81,6 +81,34 @@ public class BatchService {
 	}
 	
 	/**
+	 * Add a new batch
+	 * @param batch
+	 */
+	public void addBatch(Batch batch) {
+		batchRepository.save(batch);
+	}
+	
+	/**
+	 * Update batch information
+	 * @param batchId
+	 * @param batch
+	 */
+	public void updateBatch(Integer batchId, Batch batch) {
+		batch.setBatchId(batchId);
+		batchRepository.save(batch);
+	}
+	
+	/**
+	 * Delete a batch by batchId
+	 * @param batchId
+	 */
+	public void deleteBatch(Integer batchId) {
+		if(batchRepository.findOne(batchId) != null) {
+			batchRepository.delete(batchId);
+		}
+	}
+	
+	/**
 	 * Create a mapping from a list
 	 * @param lb
 	 * @return Map<Integer, Batch>
