@@ -56,6 +56,16 @@ public class BatchController {
 	}
 	
 	/**
+	 * Retrieves a curriculum id for a batch
+	 * @param id
+	 * @return ResponseEntity<Integer>
+	 */
+	@RequestMapping(value = "/one/batch/curriculum/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Integer> getCurriculumIdByBatch(@PathVariable Integer id) {
+		return new ResponseEntity<>(batchService.getBatchCurriculumId(id), HttpStatus.OK);
+	}
+	
+	/**
 	 * Retrieves all batches in order of start date
 	 * @return ResponseEntity<List<Batch>>
 	 */

@@ -43,6 +43,16 @@ public class BatchService {
 	}
 	
 	/**
+	 * Get CurriculumId by batch id
+	 * @param batchId
+	 * @return
+	 */
+	public Integer getBatchCurriculumId(Integer batchId) {
+		Batch b = batchRepository.findOne(batchId);
+		return b.getCurriculumId();
+	}
+	
+	/**
 	 * Get all batches in a map
 	 * @return Map<Integer, Batch>
 	 */
