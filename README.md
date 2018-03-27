@@ -1,7 +1,16 @@
 # hydra-batch-service
 Fields in the Batch and BatchLocation beans are as follows:
 * Batch
+	* Integer batchId
+	* String batchId
+	* Integer batchLocationId
+	* Timestamp batchStartDate
+	* Timestamp batchEndDate
+	* Integer curriculumId
+	* HashSet<Integer> associates //is not functional, has no data
 * BatchLocation
+	* Integer batchLocationId
+	* String batchLocationName
 
 The controller can perform the following functions:
 * BatchController
