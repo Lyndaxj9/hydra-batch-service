@@ -94,8 +94,8 @@ public class BatchController {
 	
 	/**
 	 * Retrieves all batches that are between the two specified dates
-	 * @param startDate
-	 * @param endDate
+	 * @param Long startDate
+	 * @param Long endDate
 	 * @return
 	 */
 	@RequestMapping(value = "/all/batch/btw/{startDate}/{endDate}", method = RequestMethod.GET)
@@ -111,7 +111,7 @@ public class BatchController {
 	@RequestMapping(value = "/add/batch", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> addBatch(@RequestBody Batch batch) {
 		batchService.addBatch(batch);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
 	/**

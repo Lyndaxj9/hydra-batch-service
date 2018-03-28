@@ -17,7 +17,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "CALIBER_BATCH_LOCATION")
+@Table(name = "TF_BATCH_LOCATION")
 public class BatchLocation implements Serializable {
 	private static final long serialVersionUID = 9110421700932292732L;
 
@@ -31,11 +31,15 @@ public class BatchLocation implements Serializable {
 	private Integer batchLocationId;
 	
 	/**
-	 * Name of a batch location
+	 * Name of a batch location and it's address
 	 */
 	@Column(name = "BATCH_LOCATION_NAME")
 	private String batchLocationName;
 	
+	/**
+	 * To contain all the batches that occur at a location
+	 * Not in use
+	 */
 	private HashSet<Batch> batches = new HashSet<Batch>(0);
 
 	public BatchLocation() {

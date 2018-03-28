@@ -18,7 +18,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "CALIBER_BATCH")
+@Table(name = "TF_BATCH")
 public class Batch implements Serializable {
 	private static final long serialVersionUID = -4807985624462658242L;
 
@@ -63,6 +63,7 @@ public class Batch implements Serializable {
 	
 	/**
 	 * Set of associates that belong to a specific batch
+	 * Not in use
 	 */
 	@Column(name = "ASSOCIATES_SET")
 	private HashSet<Integer> associates;

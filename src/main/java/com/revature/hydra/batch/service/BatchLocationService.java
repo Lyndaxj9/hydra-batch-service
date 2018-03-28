@@ -1,5 +1,7 @@
 package com.revature.hydra.batch.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +27,13 @@ public class BatchLocationService {
 	 */
 	public BatchLocation getBatchLocationById(Integer batchLocationId) {
 		return batchLocationRepository.findOne(batchLocationId);
+	}
+	
+	/**
+	 * Get all batches
+	 * @return List<BatchLocation>
+	 */
+	public List<BatchLocation> getAllBatchLocations() {
+		return batchLocationRepository.findAll();
 	}
 }

@@ -1,5 +1,7 @@
 package com.revature.hydra.batch.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
@@ -30,12 +32,21 @@ public class BatchLocationController {
 	}
 	
 	/**
-	 * Retrieves a batch by id
+	 * Retrieves a batch location by id
 	 * @param id
-	 * @return ResponseEntity<Batch>
+	 * @return ResponseEntity<BatchLocation>
 	 */
 	@RequestMapping(value = "/one/batchlocation/byid/{id}", method = RequestMethod.GET)
 	public ResponseEntity<BatchLocation> getBatchLocationById(@PathVariable Integer id) {
 		return new ResponseEntity<>(batchLocationService.getBatchLocationById(id), HttpStatus.OK);
+	}
+	
+	/**
+	 * Retrieves all batch locations
+	 * @return ResponseEntity<List<BatchLocation>>
+	 */
+	@RequestMapping(value = "/all/batchlocation", method = RequestMethod.GET)
+	public ResponseEntity<List<BatchLocation>> getAllBatchLocation() {
+		return new ResponseEntity<>(batchLocationService.getAllBatchLocations(), HttpStatus.OK);
 	}
 }
