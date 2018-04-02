@@ -7,7 +7,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Controller;
 
-@Controller
+/**
+ * To start spring boot applications
+ * @author Omowumi
+ *
+ */
 @EnableAutoConfiguration
 @EnableJpaRepositories("com.revature.hydra.batch.data")
 @ComponentScan(basePackages = {"com.revature.hydra.batch.controller", "com.revature.hydra.batch.service"})
