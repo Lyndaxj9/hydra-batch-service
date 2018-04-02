@@ -63,6 +63,10 @@ public class BatchLocationControllerTest {
 	
 	private BatchLocation testBatchLocation;
 
+	/**
+	 * Create a test batch location in table to test on
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
@@ -70,6 +74,10 @@ public class BatchLocationControllerTest {
 		this.testBatchLocation = this.batchLocationRepository.save(this.testBatchLocation);
 	}
 
+	/**
+	 * Remove test batch location so that it doesn't cause problems with repeated runs 
+	 * of the test and isn't left in database for production
+	 */
 	@After
 	public void tearDown() {
 		int testId = this.testBatchLocation.getBatchLocationId();
@@ -78,6 +86,10 @@ public class BatchLocationControllerTest {
 		}
 	}
 	
+	/**
+	 * Test receiving a batch location by id
+	 * @throws Exception
+	 */
 	@Test
 	public void test1OneBatchLocationById() throws Exception {
 		this.mockMvc.perform(get("/one/batchlocation/byid/" + this.testBatchLocation.getBatchLocationId()))
@@ -86,6 +98,10 @@ public class BatchLocationControllerTest {
 					.andExpect(jsonPath("$.batchLocationName", CoreMatchers.is(this.testBatchLocation.getBatchLocationName())));
 	}
 	
+	/**
+	 * Test receiving all batch locations
+	 * @throws Exception
+	 */
 	@Test
 	public void test2AllBatchLocation() throws Exception {
 		this.mockMvc.perform(get("/all/batchlocation"))
@@ -94,7 +110,12 @@ public class BatchLocationControllerTest {
 					.andExpect(jsonPath("$[*].batchLocationId", Matchers.hasItem(this.testBatchLocation.getBatchLocationId())));
 	}
 
-	
+	/**
+	 * Used to convert a java object into a json
+	 * @param obj
+	 * @return
+	 * @throws IOException
+	 */
 	protected String json(Object obj) throws IOException {
 		MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
 		this.mappingJackson2HttpMessageConverter.write(obj, MediaType.APPLICATION_JSON, mockHttpOutputMessage);

@@ -2,7 +2,7 @@
 Fields in the Batch and BatchLocation beans are as follows:
 * Batch
 	* Integer batchId
-	* String batchId
+	* String batchName
 	* Integer batchLocationId
 	* Timestamp batchStartDate
 	* Timestamp batchEndDate
@@ -16,6 +16,7 @@ The controller can perform the following functions:
 * BatchController
 	* getBatchByName(@PathVariable String name), via a GET to /one/batch/byname/{name}
 	* getBatchById(@PathVariable Integer id), via a GET to /one/batch/byid/{id}
+	* getCurriculumIdByBatch(@PathVariable Integer id), via a GET to /one/batch/curriculum/{id}
 	* getAllBatchesOrdered(), via a GET to /all/batch/ordered
 	* getAllBatchesMapped(), via a GET to /all/batch/mapped
 	* getAllBatchesSet(), via a GET to /all/batch/set
@@ -25,3 +26,4 @@ The controller can perform the following functions:
 	* deleteBatch(@PathVariable Integer id), via a DELETE to /delete/batch/{id}
 * BatchLocationController
 	* getBatchLocationById(@PathVariable Integer id), via a GET to /one/batchlocation/byid/{id}
+	* getAllBatchLocation(), via a GET to /all/batchlocation

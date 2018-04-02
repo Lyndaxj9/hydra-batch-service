@@ -37,6 +37,11 @@ import com.revature.beans.Batch;
 import com.revature.hydra.batch.application.BatchRepositoryServiceApplication;
 import com.revature.hydra.batch.data.BatchRepository;
 
+/**
+ * Testing for the Batch Controller using Spring MVC Testing Framework
+ * @author Omowumi
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = BatchRepositoryServiceApplication.class)
 @WebAppConfiguration
@@ -67,6 +72,10 @@ public class BatchControllerTest {
 	
 	private Batch testBatch;
 
+	/**
+	 * Create a test batch in table to test on
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
@@ -79,14 +88,21 @@ public class BatchControllerTest {
 		this.testBatch = this.batchRepository.save(this.testBatch);
 	}
 
+	/**
+	 * Remove test batch so that it doesn't cause problems with repeated runs of the test and isn't left in database for production
+	 */
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() {
 		int testId = this.testBatch.getBatchId();
 		if (this.batchRepository.findOne(testId) != null) {
 			this.batchRepository.delete(testId);
 		}
 	}
 
+	/**
+	 * Test receiving one batch by the batch name
+	 * @throws Exception
+	 */
 	@Test
 	public void test1OneByName() throws Exception {
 		this.mockMvc.perform(get("/one/batch/byname/" + this.testBatch.getBatchName()))
@@ -97,6 +113,10 @@ public class BatchControllerTest {
 					.andExpect(jsonPath("$.batchLocationId", CoreMatchers.is(this.testBatch.getBatchLocationId())));
 	}
 	
+	/**
+	 * Test receiving one batch by the batch id
+	 * @throws Exception
+	 */
 	@Test
 	public void test2OneById() throws Exception {
 		this.mockMvc.perform(get("/one/batch/byid/" + this.testBatch.getBatchId()))
@@ -108,6 +128,10 @@ public class BatchControllerTest {
 					.andExpect(jsonPath("$.batchLocationId", CoreMatchers.is(this.testBatch.getBatchLocationId())));
 	}
 	
+	/**
+	 * Test receiving a curriculum id based on batch id
+	 * @throws Exception
+	 */
 	@Test
 	public void test3OneBatchCurriculum() throws Exception {
 		this.mockMvc.perform(get("/one/batch/curriculum/" + this.testBatch.getBatchId()))
@@ -116,6 +140,10 @@ public class BatchControllerTest {
 					.andExpect(jsonPath("$", CoreMatchers.is(this.testBatch.getCurriculumId())));
 	}
 	
+	/**
+	 * Test receiving batches in order based on date
+	 * @throws Exception
+	 */
 	@Test
 	public void test4AllBatchOrdered() throws Exception {
 		this.mockMvc.perform(get("/all/batch/ordered"))
@@ -123,6 +151,10 @@ public class BatchControllerTest {
 					.andExpect(content().contentType(this.mediaTypeJson));
 	}
 	
+	/**
+	 * Test receiving batches in a map to be accessed by batch id
+	 * @throws Exception
+	 */
 	@Test
 	public void test5AllBatchMapped() throws Exception {
 		this.mockMvc.perform(get("/all/batch/mapped"))
@@ -131,6 +163,10 @@ public class BatchControllerTest {
 					.andExpect(jsonPath("$.20.batchId", CoreMatchers.is(20)));
 	}
 	
+	/**
+	 * Test receiving batches in a set
+	 * @throws Exception
+	 */
 	@Test
 	public void test6AllBatchSet() throws Exception {
 		this.mockMvc.perform(get("/all/batch/set"))
@@ -139,6 +175,10 @@ public class BatchControllerTest {
 					.andExpect(jsonPath("$[*].batchId", Matchers.hasItem(this.testBatch.getBatchId())));
 	}
 	
+	/**
+	 * Test receiving batches that have end dates between the provided dates
+	 * @throws Exception
+	 */
 	@Test
 	public void test7AllBatchBtwDates() throws Exception {
 		Long fromDate = 1497283200001L;
@@ -150,6 +190,10 @@ public class BatchControllerTest {
 					//.andExpect(jsonPath("$[-1:].batchEndDate", Matchers.lessThanOrEqualTo(toDate)));
 	}
 	
+	/**
+	 * Test adding a new batch
+	 * @throws Exception
+	 */
 	@Test
 	public void test8AddBatch() throws Exception {
 		Batch addBatch = new Batch();
@@ -164,6 +208,10 @@ public class BatchControllerTest {
 					.andExpect(status().isCreated());
 	}
 	
+	/**
+	 * Test updating a batches information
+	 * @throws Exception
+	 */
 	@Test
 	public void test9UpdateBatch() throws Exception {
 		this.testBatch.setBatchName("updateBatchName");
@@ -173,12 +221,22 @@ public class BatchControllerTest {
 					.andExpect(status().isOk());
 	}
 	
+	/**
+	 * Test delete a batch
+	 * @throws Exception
+	 */
 	@Test
 	public void test10DeleteBatch() throws Exception {
 		this.mockMvc.perform(delete("/delete/batch/" + this.testBatch.getBatchId()))
 					.andExpect(status().isOk());
 	}
 	
+	/**
+	 * Used to convert a java object into a json
+	 * @param obj
+	 * @return
+	 * @throws IOException
+	 */
 	protected String json(Object obj) throws IOException {
 		MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
 		this.mappingJackson2HttpMessageConverter.write(obj, MediaType.APPLICATION_JSON, mockHttpOutputMessage);
