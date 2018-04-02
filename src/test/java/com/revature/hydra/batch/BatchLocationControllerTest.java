@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.io.IOException;
 import java.util.Arrays;
 
+import org.apache.log4j.Logger;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matchers;
 import org.junit.After;
@@ -33,11 +34,17 @@ import com.revature.beans.BatchLocation;
 import com.revature.hydra.batch.application.BatchRepositoryServiceApplication;
 import com.revature.hydra.batch.data.BatchLocationRepository;
 
+/**
+ * Testing for the Batch Location Controller using Spring MVC Testing Framework
+ * @author Omowumi
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = BatchRepositoryServiceApplication.class)
 @WebAppConfiguration
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BatchLocationControllerTest {
+	private static final Logger log = Logger.getLogger(BatchLocationControllerTest.class);
 	
 	@Autowired
     private WebApplicationContext webApplicationContext;
@@ -69,6 +76,7 @@ public class BatchLocationControllerTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		log.info("setUp");
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 		this.testBatchLocation = new BatchLocation();
 		this.testBatchLocation = this.batchLocationRepository.save(this.testBatchLocation);
@@ -80,6 +88,7 @@ public class BatchLocationControllerTest {
 	 */
 	@After
 	public void tearDown() {
+		log.info("tearDown: ");
 		int testId = this.testBatchLocation.getBatchLocationId();
 		if (this.batchLocationRepository.findOne(testId) != null) {
 			this.batchLocationRepository.delete(testId);
@@ -92,6 +101,7 @@ public class BatchLocationControllerTest {
 	 */
 	@Test
 	public void test1OneBatchLocationById() throws Exception {
+		log.info("test1OneBatchLocationById: ");
 		this.mockMvc.perform(get("/one/batchlocation/byid/" + this.testBatchLocation.getBatchLocationId()))
 					.andExpect(status().isOk())
 					.andExpect(content().contentType(this.mediaTypeJson))
@@ -104,6 +114,7 @@ public class BatchLocationControllerTest {
 	 */
 	@Test
 	public void test2AllBatchLocation() throws Exception {
+		log.info("test2AllBatchLocation: ");
 		this.mockMvc.perform(get("/all/batchlocation"))
 					.andExpect(status().isOk())
 					.andExpect(content().contentType(this.mediaTypeJson))
@@ -117,6 +128,7 @@ public class BatchLocationControllerTest {
 	 * @throws IOException
 	 */
 	protected String json(Object obj) throws IOException {
+		log.info("json: ");
 		MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
 		this.mappingJackson2HttpMessageConverter.write(obj, MediaType.APPLICATION_JSON, mockHttpOutputMessage);
 		return mockHttpOutputMessage.getBodyAsString();

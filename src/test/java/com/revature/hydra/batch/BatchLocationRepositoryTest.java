@@ -16,7 +16,11 @@ import com.revature.beans.BatchLocation;
 import com.revature.hydra.batch.application.BatchRepositoryServiceApplication;
 import com.revature.hydra.batch.data.BatchLocationRepository;
 
-
+/**
+ * Testing for the Batch Location Repository
+ * @author Omowumi
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = BatchRepositoryServiceApplication.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -31,6 +35,10 @@ private static final Logger log = Logger.getLogger(BatchLocationRepositoryTest.c
 	
 	Integer testId;
 
+	/**
+	 * Create a test batch location in table to test on
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		log.info("setUp");
@@ -40,14 +48,21 @@ private static final Logger log = Logger.getLogger(BatchLocationRepositoryTest.c
 		testId = testBatchLocation.getBatchLocationId();
 	}
 
+	/**
+	 * Remove test batch location so that it doesn't cause problems with
+	 * repeated runs of the test and isn't left in database for production
+	 */
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() {
 		log.info("tearDown");
 		if(batchLocationRepository.findOne(testId) != null) {
 			batchLocationRepository.delete(testId);
 		}
 	}
 
+	/**
+	 * Test receiving one batch location based on batch location id
+	 */
 	@Test
 	public void test1FindOne() {
 		log.info("test1FindOne");
@@ -55,6 +70,9 @@ private static final Logger log = Logger.getLogger(BatchLocationRepositoryTest.c
 		Assert.assertEquals(testBatchLocation.getBatchLocationId(), bl.getBatchLocationId());
 	}
 	
+	/**
+	 * Test updating a batch location's 
+	 */
 	@Test
 	public void test2Update() {
 		log.info("test2Update");
@@ -64,6 +82,9 @@ private static final Logger log = Logger.getLogger(BatchLocationRepositoryTest.c
 		Assert.assertEquals(changeName, updated.getBatchLocationName());
 	}
 	
+	/**
+	 * Test deleting a batch locations
+	 */
 	@Test
 	public void test3Delete() {
 		log.info("test3Delete");

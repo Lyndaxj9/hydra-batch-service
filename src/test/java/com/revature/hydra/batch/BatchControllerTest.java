@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Arrays;
 
+import org.apache.log4j.Logger;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matchers;
 import org.junit.After;
@@ -47,6 +48,7 @@ import com.revature.hydra.batch.data.BatchRepository;
 @WebAppConfiguration
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BatchControllerTest {
+	private static final Logger log = Logger.getLogger(BatchControllerTest.class);
 	
 	@Autowired
     private WebApplicationContext webApplicationContext;
@@ -78,6 +80,7 @@ public class BatchControllerTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		log.info("setUp: ");
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 		this.testBatch = new Batch();
 		this.testBatch.setBatchName("testBatchName");
@@ -93,6 +96,7 @@ public class BatchControllerTest {
 	 */
 	@After
 	public void tearDown() {
+		log.info("tearDown: ");
 		int testId = this.testBatch.getBatchId();
 		if (this.batchRepository.findOne(testId) != null) {
 			this.batchRepository.delete(testId);
@@ -105,6 +109,7 @@ public class BatchControllerTest {
 	 */
 	@Test
 	public void test1OneByName() throws Exception {
+		log.info("test1OneByName: ");
 		this.mockMvc.perform(get("/one/batch/byname/" + this.testBatch.getBatchName()))
 					.andExpect(status().isOk())
 					.andExpect(content().contentType(this.mediaTypeJson))
@@ -119,6 +124,7 @@ public class BatchControllerTest {
 	 */
 	@Test
 	public void test2OneById() throws Exception {
+		log.info("test2OneById: ");
 		this.mockMvc.perform(get("/one/batch/byid/" + this.testBatch.getBatchId()))
 					.andExpect(status().isOk())
 					.andExpect(content().contentType(this.mediaTypeJson))
@@ -134,6 +140,7 @@ public class BatchControllerTest {
 	 */
 	@Test
 	public void test3OneBatchCurriculum() throws Exception {
+		log.info("test3OneBatchCurriculum: ");
 		this.mockMvc.perform(get("/one/batch/curriculum/" + this.testBatch.getBatchId()))
 					.andExpect(status().isOk())
 					.andExpect(content().contentType(this.mediaTypeJson))
@@ -146,6 +153,7 @@ public class BatchControllerTest {
 	 */
 	@Test
 	public void test4AllBatchOrdered() throws Exception {
+		log.info("test4AllBatchOrdered: ");
 		this.mockMvc.perform(get("/all/batch/ordered"))
 					.andExpect(status().isOk())
 					.andExpect(content().contentType(this.mediaTypeJson));
@@ -157,6 +165,7 @@ public class BatchControllerTest {
 	 */
 	@Test
 	public void test5AllBatchMapped() throws Exception {
+		log.info("test5AllBatchMapped: ");
 		this.mockMvc.perform(get("/all/batch/mapped"))
 					.andExpect(status().isOk())
 					.andExpect(content().contentType(this.mediaTypeJson))
@@ -169,6 +178,7 @@ public class BatchControllerTest {
 	 */
 	@Test
 	public void test6AllBatchSet() throws Exception {
+		log.info("test6AllBatchSet: ");
 		this.mockMvc.perform(get("/all/batch/set"))
 					.andExpect(status().isOk())
 					.andExpect(content().contentType(this.mediaTypeJson))
@@ -181,6 +191,7 @@ public class BatchControllerTest {
 	 */
 	@Test
 	public void test7AllBatchBtwDates() throws Exception {
+		log.info("test7AllBatchBtwDates: ");
 		Long fromDate = 1497283200001L;
 		Long toDate = 1503676800001L;
 		this.mockMvc.perform(get("/all/batch/btw/" + fromDate + "/" + toDate))
@@ -196,6 +207,7 @@ public class BatchControllerTest {
 	 */
 	@Test
 	public void test8AddBatch() throws Exception {
+		log.info("test8AddBatch: ");
 		Batch addBatch = new Batch();
 		addBatch.setBatchName("testAddBatchName");
 		addBatch.setBatchLocationId(1);
@@ -214,6 +226,7 @@ public class BatchControllerTest {
 	 */
 	@Test
 	public void test9UpdateBatch() throws Exception {
+		log.info("test9UpdateBatch: ");
 		this.testBatch.setBatchName("updateBatchName");
 		this.mockMvc.perform(put("/update/batch/" + this.testBatch.getBatchId())
 					.content(this.json(this.testBatch))
@@ -227,6 +240,7 @@ public class BatchControllerTest {
 	 */
 	@Test
 	public void test10DeleteBatch() throws Exception {
+		log.info("test10DeleteBatch: ");
 		this.mockMvc.perform(delete("/delete/batch/" + this.testBatch.getBatchId()))
 					.andExpect(status().isOk());
 	}
@@ -238,6 +252,7 @@ public class BatchControllerTest {
 	 * @throws IOException
 	 */
 	protected String json(Object obj) throws IOException {
+		log.info("json: ");
 		MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
 		this.mappingJackson2HttpMessageConverter.write(obj, MediaType.APPLICATION_JSON, mockHttpOutputMessage);
 		return mockHttpOutputMessage.getBodyAsString();

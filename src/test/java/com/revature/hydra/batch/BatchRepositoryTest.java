@@ -19,6 +19,11 @@ import com.revature.beans.Batch;
 import com.revature.hydra.batch.application.BatchRepositoryServiceApplication;
 import com.revature.hydra.batch.data.BatchRepository;
 
+/**
+ * Testing for the Batch Repository
+ * @author Omowumi
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = BatchRepositoryServiceApplication.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -31,7 +36,11 @@ public class BatchRepositoryTest {
 	Batch testBatch;
 	
 	Integer testId;
-
+	
+	/**
+	 * Create a test batch in table to test on
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		log.info("setUp");
@@ -45,14 +54,20 @@ public class BatchRepositoryTest {
 		testId = testBatch.getBatchId();
 	}
 
+	/**
+	 * Remove test batch so that it doesn't cause problems with repeated runs of the test and isn't left in database for production
+	 */
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() {
 		log.info("tearDown");
 		if(batchRepository.findOne(testId) != null) {
 			batchRepository.delete(testId);
 		}
 	}
 
+	/**
+	 * Test receiving all batches in a list
+	 */
 	@Test
 	public void test1FindAll() {
 		log.info("test1FindAll");
@@ -60,6 +75,9 @@ public class BatchRepositoryTest {
 		Assert.assertNotNull(batches);
 	}
 	
+	/**
+	 * Test receiving one batch by the batch name
+	 */
 	@Test
 	public void test2FindOneByBatchName() {
 		log.info("test2FindOneByBatchName");
@@ -67,6 +85,9 @@ public class BatchRepositoryTest {
 		Assert.assertEquals(testBatch.getBatchName(), b.getBatchName());
 	}
 	
+	/**
+	 * Test receiving one batch by the batch id
+	 */
 	@Test
 	public void test3FindOne() {
 		log.info("test3FindOne");
@@ -74,6 +95,9 @@ public class BatchRepositoryTest {
 		Assert.assertEquals(testBatch.getBatchId(), b.getBatchId());
 	}
 	
+	/**
+	 * Test receiving batches with end date between the two dates passed in
+	 */
 	@Test
 	public void test4FindAllByOrderByBatchStartDateAsc() {
 		log.info("test4FindAllByOrderByBatchStartDateAsc");
@@ -91,6 +115,9 @@ public class BatchRepositoryTest {
 		Assert.assertTrue(first.getBatchStartDate().getTime() < last.getBatchStartDate().getTime());
 	}
 	
+	/**
+	 * Test updating a batch
+	 */
 	@Test
 	public void test5Update() {
 		log.info("test5Update");
@@ -100,6 +127,9 @@ public class BatchRepositoryTest {
 		Assert.assertEquals(changeName, updated.getBatchName());
 	}
 	
+	/**
+	 * Test deleteing a batch
+	 */
 	@Test
 	public void test6Delete() {
 		log.info("test6Delete");
